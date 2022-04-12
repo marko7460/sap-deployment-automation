@@ -13,6 +13,19 @@
 # limitations under the License.
 steps:
 - name: "sap-gcp-developer-tools:0.1"
-  id: "0"
+  id: "HANA - HA"
   args:
-    - /usr/local/bin/test_lint.sh
+    - ./ansible-wrapper stacks/HANA-HA/playbook-int-test.yml -e @vars.yml
+  env:
+    - 'TF_VAR_org_id=$_ORG_ID'
+    - 'TF_VAR_folder_id=$_FOLDER_ID'
+    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
+- name: "sap-gcp-developer-tools:0.1"
+  id: "HANA-Scaleout"
+  args:
+    - ./ansible-wrapper stacks/HANA-ScaleOut/playbook-int-test.yml -e @vars.yml
+  env:
+    - 'TF_VAR_org_id=$_ORG_ID'
+    - 'TF_VAR_folder_id=$_FOLDER_ID'
+    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
+  waitFor: ['-']
