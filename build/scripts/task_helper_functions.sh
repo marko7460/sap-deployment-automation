@@ -53,7 +53,7 @@ find_files() {
   fi
 
   # if find_files is used for validating license headers
-  if [ $1 = "for_header_check" ]; then
+  if [ "$1" = "for_header_check" ]; then
     # Add any files to be skipped for header check
     if [[ -n "${EXCLUDE_HEADER_CHECK-}" ]]; then
       find_path_regex+="${EXCLUDE_HEADER_CHECK}"
@@ -126,8 +126,9 @@ init_credentials_if_found() {
 
 # This function creates TF_PLUGIN_CACHE_DIR if TF_PLUGIN_CACHE_DIR envvar is set
 function init_tf_plugin_cache() {
+  # shellcheck disable=SC2236
   if [[ ! -z "${TF_PLUGIN_CACHE_DIR}" ]]; then
-    mkdir -p ${TF_PLUGIN_CACHE_DIR}
+    mkdir -p "${TF_PLUGIN_CACHE_DIR}"
   fi
 }
 

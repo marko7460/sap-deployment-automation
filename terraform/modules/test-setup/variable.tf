@@ -26,11 +26,6 @@ variable "billing_account_id" {
 
 variable "folder_id" {
   description = "ID of the folder where test projects will be created"
-  type = string
-}
-
-variable "media_bucket" {
-  description = "Bucket That Hold SAP Images"
   type        = string
 }
 

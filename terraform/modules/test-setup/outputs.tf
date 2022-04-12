@@ -15,27 +15,27 @@
  */
 output "vpc" {
   description = "Output of all VPC related values"
-  value = module.vpc
+  value       = module.vpc
 }
 
 output "project_id" {
   description = "Test project ID"
-  value = module.vpc.project_id
+  value       = module.vpc.project_id
 }
 
 output "region" {
   description = "Default Region where resources are deployed"
-  value = var.region
+  value       = var.region
 }
 
 output "state_bucket" {
   description = "State bucket for forminator"
-  value = google_storage_bucket.state_bucket.name
+  value       = google_storage_bucket.state_bucket.name
 }
 
 output "network_tags" {
   description = "Network tags used by forminator"
-  value = var.network_tags
+  value       = var.network_tags
 }
 
 output "public_key_openssh" {
@@ -56,10 +56,10 @@ output "bastion_ip" {
 
 output "sap_service_account" {
   description = "SAP Service Account for VMs"
-  value = google_service_account.sap_service_account.email
+  value       = google_service_account.sap_service_account.email
 }
 
 output "media_bucket" {
   description = "Bucket where SAP installation files are located"
-  value = var.media_bucket
+  value       = google_storage_bucket.media_bucket.name
 }

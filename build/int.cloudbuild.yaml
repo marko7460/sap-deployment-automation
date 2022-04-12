@@ -11,28 +11,32 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-timeout: 12600s
+timeout: 7200s
 steps:
 - id: "HANA-Scaleup"
-  name: "us-docker.pkg.dev/sap-iac-cicd/cicd/developer-tools:0.1"
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   args:
-    - "./int-test.sh"
-    - "stacks/HANA-Scaleup/playbook-int-test.yml"
-  env:
-    - 'TF_VAR_org_id=998150935773'
-    - 'TF_VAR_folder_id=723956868096'
-    - 'TF_VAR_media_bucket=sap-iac-cicd-deployment-media'
-    - 'TF_VAR_billing_account_id=01B1A8-71DE39-09742B'
+    - ./int-test.sh
+    - stacks/HANA-Scaleup/playbook-int-test.yml
 - id: "HANA-HA"
   waitFor: ['-']
-  name: "us-docker.pkg.dev/sap-iac-cicd/cicd/developer-tools:0.1"
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   args:
-    - "./int-test.sh"
-    - "stacks/HANA-HA/playbook-int-test.yml"
-  env:
-    - 'TF_VAR_org_id=998150935773'
-    - 'TF_VAR_folder_id=723956868096'
-    - 'TF_VAR_media_bucket=sap-iac-cicd-deployment-media'
-    - 'TF_VAR_billing_account_id=01B1A8-71DE39-09742B'
+    - ./int-test.sh
+    - stacks/HANA-HA/playbook-int-test.yml
+- id: "NetWeaver-Standard"
+  waitFor: ['-']
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
+  args:
+    - ./int-test.sh
+    - stacks/NetWeaver-Standard/playbook-int-test.yml
+substitutions:
+  _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
 options:
   machineType: 'N1_HIGHCPU_8'
+  env:
+    - 'TF_VAR_org_id=$_ORG_ID'
+    - 'TF_VAR_folder_id=$_FOLDER_ID'
+    - 'TF_VAR_billing_account_id=$_BILLING_ACCOUNT'
+    - 'MEDIA_BUCKET=$_MEDIA_BUCKET'

@@ -29,6 +29,10 @@ module "project" {
   org_id            = var.org_id
   billing_account   = var.billing_account_id
   folder_id         = var.folder_id
+  activate_apis = [
+    "compute.googleapis.com",
+    "logging.googleapis.com"
+  ]
 }
 
 locals {
@@ -38,15 +42,23 @@ locals {
 }
 
 resource "google_service_account" "sap_service_account" {
-  project = module.project.project_id
-  account_id = "sap-sa-test"
+  project      = module.project.project_id
+  account_id   = "sap-sa-test"
   display_name = "SAP service account for VMs"
 }
 
+resource "google_storage_bucket" "media_bucket" {
+  project                     = module.project.project_id
+  location                    = "US"
+  name                        = "${module.project.project_id}-media-bucket"
+  uniform_bucket_level_access = true
+  force_destroy               = true
+}
+
 resource "google_storage_bucket_iam_member" "media_bucket_role" {
-  bucket = var.media_bucket
+  bucket = google_storage_bucket.media_bucket.name
   member = "serviceAccount:${google_service_account.sap_service_account.email}"
-  role   = "roles/storage.objectViewer"
+  role   = "roles/storage.admin"
 }
 
 module "vpc" {
@@ -145,6 +157,20 @@ resource "google_compute_firewall" "all-ssh" {
   network                 = module.vpc.network_name
   target_service_accounts = [google_service_account.bastion.email]
   source_ranges           = ["0.0.0.0/0"]
+  allow {
+    protocol = "TCP"
+    ports    = [22]
+  }
+}
+
+# Create firewall rule to allow iap connection to SAP instances
+resource "google_compute_firewall" "iap" {
+  project                 = module.vpc.project_id
+  name                    = "iap-${random_string.name_suffix.result}"
+  network                 = module.vpc.network_name
+  source_ranges           = ["35.235.240.0/20"]
+  target_service_accounts = [google_service_account.sap_service_account.email]
+
   allow {
     protocol = "TCP"
     ports    = [22]

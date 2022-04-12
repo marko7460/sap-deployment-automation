@@ -16,38 +16,37 @@
 #set -u
 
 setup_trap_handler() {
+  # shellcheck disable=SC2124
   readonly ANSIBLE_ARGS="$@"
   trap finish EXIT
 }
 
 finish() {
   # This function executes on exit and destroys the working project
-  echo $ANSIBLE_ARGS
-  echo rc=$rc
-  stack_directory=$(dirname $ANSIBLE_ARGS)
+  echo "$ANSIBLE_ARGS"
+  echo "rc=$rc"
+  stack_directory=$(dirname "$ANSIBLE_ARGS")
   setup_directory="$stack_directory/test-setup"
-  project_id=$(terraform -chdir=${setup_directory} output -raw project_id)
-  media_bucket=$(terraform -chdir=${setup_directory} output -raw media_bucket)
-  sap_service_account=$(terraform -chdir=${setup_directory} output -raw sap_service_account)
-  gsutil iam ch -d serviceAccount:$sap_service_account gs://$media_bucket
-  gcloud projects delete $project_id --quiet
+  project_id=$(terraform -chdir="${setup_directory}" output -raw project_id)
+  gcloud projects delete "$project_id" --quiet
 }
-
+# shellcheck disable=SC2068
 setup_trap_handler ${@}
 
 #mkdir -p $TF_PLUGIN_CACHE_DIR
 unset TF_PLUGIN_CACHE_DIR
-
+envd
 rc=0 # return code for ansible playbook
-
-# retry playbook in case of failure
-for i in {1..2}; do
+# retry playbook in case of a failure
+for i in 1 2; do
+  echo ansible-playbook "${@}"
+  # shellcheck disable=SC2068
   ansible-playbook ${@}
   rc=$?
+  echo "rc=$rc" "try=$i"
   if [ "$rc" = "0" ]; then
     break
   fi
 done
-echo "Return code = $rc"
-exit $rc
 
+exit $rc
