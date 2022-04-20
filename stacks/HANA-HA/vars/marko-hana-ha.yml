@@ -1,0 +1,49 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Terraform common vars for hana and netweaver (optional)
+state: absent
+sap_primary_zone: us-west1-b
+sap_secondary_zone: us-west1-c
+
+# Ansible/Terraform common vars for hana and netweaver (required)
+sap_project_id: hana-ha-ba84
+sap_source_image_family: rhel-7-7-sap-ha
+sap_source_image_project: rhel-sap-cloud
+sap_tf_state_bucket: hana-ha-ba84-tf-state
+sap_hana_subnetwork: test-01
+sap_subnetwork_project_id: hana-ha-ba84
+sap_tf_state_bucket_prefix: hanaha
+sap_hana_install_files_bucket: "hana-ha-ba84-media-bucket"
+
+# Terraform hana variables (required)
+# Instance name should be 7 charecters or less
+sap_hana_instance_name: hanslbg
+sap_hana_service_account_name: sap-sa-test
+
+# Terraform hana variables (optional)
+sap_hana_instance_type: n1-highmem-32
+sap_hana_autodelete_boot_disk: "true"
+sap_hana_boot_disk_size: 30
+sap_hana_boot_disk_type: pd-ssd
+sap_hana_additional_disk_type: pd-balanced
+sap_hana_network_tags: ["sap-allow-all"]
+sap_hana_target_instance_size: 1
+sap_hana_pd_kms_key: null
+sap_hana_create_backup_volume: true
+sap_hana_backint_install: false
+sap_hana_fast_restart: false
+
+# Ansible hana variables (required)
+sap_hana_password: Google123
