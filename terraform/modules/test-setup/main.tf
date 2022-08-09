@@ -31,7 +31,8 @@ module "project" {
   folder_id         = var.folder_id
   activate_apis = [
     "compute.googleapis.com",
-    "logging.googleapis.com"
+    "logging.googleapis.com",
+    "secretmanager.googleapis.com"
   ]
 }
 
@@ -102,65 +103,6 @@ resource "google_storage_bucket" "state_bucket" {
   name                        = "${module.project.project_id}-${var.tf_state_bucket_suffix}"
   uniform_bucket_level_access = true
   force_destroy               = true
-}
-
-resource "google_service_account" "bastion" {
-  account_id   = var.bastion_sa
-  display_name = "bations test setup"
-  project      = module.project.project_id
-}
-
-data "google_compute_zones" "zones" {
-  project = module.project.project_id
-  region  = var.region
-}
-
-resource "tls_private_key" "ssh_key" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "google_compute_instance" "bastion" {
-  name         = var.bastion_instance_name
-  project      = module.project.project_id
-  machine_type = "e2-medium"
-  zone         = data.google_compute_zones.zones.names[0]
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-9"
-    }
-  }
-
-  network_interface {
-    subnetwork = module.vpc.subnets_self_links.0
-
-    access_config {
-      // Ephemeral public IP
-    }
-  }
-
-  metadata = {
-    ssh-keys = "ansible:${tls_private_key.ssh_key.public_key_openssh}"
-  }
-
-  service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.bastion.email
-    scopes = ["cloud-platform"]
-  }
-}
-
-resource "google_compute_firewall" "all-ssh" {
-  name                    = "allow-bastion-ssh-on-${module.vpc.network_name}"
-  project                 = module.project.project_id
-  network                 = module.vpc.network_name
-  target_service_accounts = [google_service_account.bastion.email]
-  source_ranges           = ["0.0.0.0/0"]
-  allow {
-    protocol = "TCP"
-    ports    = [22]
-  }
 }
 
 # Create firewall rule to allow iap connection to SAP instances

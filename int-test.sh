@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright 2021 Google LLC
 #
@@ -14,41 +14,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #set -u
+set -e
 
 setup_trap_handler() {
   # shellcheck disable=SC2124
-  readonly ANSIBLE_ARGS="$@"
-  trap finish EXIT
+  trap "finish $1" ERR
 }
 
 finish() {
   # This function executes on exit and destroys the working project
-  echo "$ANSIBLE_ARGS"
-  echo "rc=$rc"
-  stack_directory=$(dirname "$ANSIBLE_ARGS")
-  playbook_name=$(basename "$ANSIBLE_ARGS")
-  test_name=${playbook_name%.yml}
-  setup_directory="$stack_directory/setups/$test_name"
-  project_id=$(terraform -chdir="${setup_directory}" output -raw project_id)
+  echo "Error deploying test-setup"
+  project_id=$(terraform -chdir="$1" output -raw project_id)
   gcloud projects delete "$project_id" --quiet
 }
+
+stack_dir="stacks/$1"
+setup_directory="$stack_dir/test-setup"
+cloudbuild_config="$stack_dir/cloudbuild.yaml"
+playbook="$stack_dir/playbook.yml"
 # shellcheck disable=SC2068
-setup_trap_handler ${@}
+setup_trap_handler $setup_directory
 
 #mkdir -p $TF_PLUGIN_CACHE_DIR
 unset TF_PLUGIN_CACHE_DIR
-envd
-rc=0 # return code for ansible playbook
-# retry playbook in case of a failure
-for i in 1 2; do
-  echo ansible-playbook "${@}"
-  # shellcheck disable=SC2068
-  ansible-playbook ${@}
-  rc=$?
-  echo "rc=$rc" "try=$i"
-  if [ "$rc" = "0" ]; then
-    break
-  fi
-done
+terraform -chdir="${setup_directory}" init
+terraform -chdir="${setup_directory}" apply -auto-approve
 
-exit $rc
+playbook_vars="${setup_directory}/vars.yml"
+cat $playbook_vars
+#gcloud builds submit --config ${cloudbuild_config} --substitutions _ANSIBLE_PLAYBOOK=$playbook,_ANSIBLE_VARIABLES=$playbook_vars .

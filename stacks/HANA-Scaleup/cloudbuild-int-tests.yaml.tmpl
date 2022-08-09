@@ -1,0 +1,80 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+timeout: 7200s
+steps:
+{% for test in tests %}
+- id: "{{ test.id }} - setup files"
+  waitFor: ["-"]
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
+  args:
+    - cp
+    - "-r"
+    - "."
+    - "/hana-scaleup-{{ test.i }}"
+  volumes:
+    - name: 'hana-scaleup-{{ test.i }}'
+      path: '/hana-scaleup-{{ test.i }}'
+- id: "{{ test.id }} - test setup"
+  waitFor: ['{{ test.id }} - setup files']
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
+  env:
+    - TF_VAR_image_family={{ test.family }}
+    - TF_VAR_image_project={{ test.project }}
+    - TF_VAR_product_id={{ test.product_id }}
+    - TF_VAR_counter={{ test.i }}
+  args:
+    - ./int-test.sh
+    - HANA-Scaleup
+  dir: '/hana-scaleup-{{ test.i }}/'
+  volumes:
+    - name: 'hana-scaleup-{{ test.i }}'
+      path: '/hana-scaleup-{{ test.i }}'
+- id: "{{ test.id }} - deploy"
+  waitFor: ['{{ test.id }} - test setup']
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
+  args:
+    - ./deploy.sh
+    - stacks/HANA-Scaleup/playbook.yml
+    - stacks/HANA-Scaleup/test-setup/vars.yml
+  dir: '/hana-scaleup-{{ test.i }}/'
+  volumes:
+    - name: 'hana-scaleup-{{ test.i }}'
+      path: '/hana-scaleup-{{ test.i }}'
+- id: "{{ test.id }} - test setup destroy"
+  waitFor: ['{{ test.id }} - deploy']
+  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
+  env:
+    - TF_VAR_image_family={{ test.family }}
+    - TF_VAR_image_project={{ test.project }}
+    - TF_VAR_product_id={{ test.product_id }}
+    - TF_VAR_counter={{ test.i }}
+  script: |
+    #!/bin/bash
+    project_id=$(terraform output -raw project_id)
+    gcloud projects delete "$project_id" --quiet
+  dir: '/hana-scaleup-{{ test.i }}/stacks/HANA-Scaleup/test-setup'
+  volumes:
+    - name: 'hana-scaleup-{{ test.i }}'
+      path: '/hana-scaleup-{{ test.i }}'
+{% endfor %}
+substitutions:
+  _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
+options:
+  machineType: 'N1_HIGHCPU_32'
+  env:
+    - 'TF_VAR_org_id=998150935773'
+    - 'TF_VAR_folder_id=723956868096'
+    - 'TF_VAR_billing_account_id=01B1A8-71DE39-09742B'
+    - 'TF_VAR_media_bucket=sap-iac-cicd-deployment-media'

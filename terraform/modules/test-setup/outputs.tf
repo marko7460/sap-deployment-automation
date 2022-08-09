@@ -38,25 +38,14 @@ output "network_tags" {
   value       = var.network_tags
 }
 
-output "public_key_openssh" {
-  description = "SSH Public Key used by forminator and ansible"
-  value       = tls_private_key.ssh_key.public_key_openssh
-}
-
-output "private_key_openssh" {
-  description = "SSH Private Key used by forminator and ansible"
-  sensitive   = true
-  value       = tls_private_key.ssh_key.private_key_openssh
-}
-
-output "bastion_ip" {
-  description = "Bastion External IP used by forminator and ansible"
-  value       = google_compute_instance.bastion.network_interface.0.access_config.0.nat_ip
-}
-
-output "sap_service_account" {
+output "sap_service_account_email" {
   description = "SAP Service Account for VMs"
   value       = google_service_account.sap_service_account.email
+}
+
+output "sap_service_account_id" {
+  description = "SAP Service Account for VMs"
+  value       = google_service_account.sap_service_account.account_id
 }
 
 output "media_bucket" {
