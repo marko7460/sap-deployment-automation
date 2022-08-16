@@ -24,6 +24,7 @@ finish() {
   # This function executes on exit and destroys the working project
   echo "rc=$rc"
   echo $1
+  echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-ssh-bastion.yaml -e @"$1"
   ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-ssh-bastion.yaml -e @"$1"
 }
 # shellcheck disable=SC2068
@@ -34,14 +35,17 @@ unset TF_PLUGIN_CACHE_DIR
 
 rc=0 # return code for ansible playbook
 
+echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-container.yaml -e @"$2"
 ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-container.yaml -e @"$2"
+pwd
+env
 rc=$?
 if [ "$rc" != "0" ]; then
   exit $rc
 fi
 
 # retry playbook in case of a failure
-for i in 1 2; do
+for i in 1; do
   echo ansible-playbook "$1" -e @"$2"
   # shellcheck disable=SC2068
   ansible-playbook -v "$1" -e @"$2"

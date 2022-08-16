@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 ENV TF_VERSION=1.1.7
-ENV CLOUD_SDK_VERSION=378.0.0
+ENV CLOUD_SDK_VERSION=397.0.0
 ENV PATH /usr/local/google-cloud-sdk/bin:$PATH
 ENV WORKSPACE /workspace
 ENV TF_PLUGIN_CACHE_DIR ${WORKSPACE}/test/integration/tmp/.terraform

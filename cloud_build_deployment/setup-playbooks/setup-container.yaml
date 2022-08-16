@@ -35,6 +35,7 @@
         project_path: "{{ playbook_dir }}/../ssh-bastion"
         state: present
         force_init: true
+        lock: false
         backend_config:
           bucket: '{{ sap_tf_state_bucket }}'
           prefix: '{{ sap_bastion_bucket_prefix }}'
@@ -45,6 +46,7 @@
         TF_VAR_ssh_pub_key: "{{ sap_ssh_pub_key }}"
         TF_VAR_subnetwork: "{{ sap_bastion_subnetwork }}"
         TF_VAR_subnetwork_project_id: "{{ sap_bastion_subnetwork_project_id }}"
+        TF_VAR_bastion_instance_name: "ssh-{{ lookup('env', 'SAP_TEST_ID')| lower }}"
       register: setup
     - name: create ssh config /root/.ssh/config
       copy:

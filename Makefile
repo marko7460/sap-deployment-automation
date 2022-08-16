@@ -19,7 +19,7 @@
 SHELL := /usr/bin/env bash
 
 DOCKER_IMAGE_DEVELOPER_TOOLS := us-docker.pkg.dev/sap-iac-cicd/cicd/developer-tools
-DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 0.1
+DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 0.2
 DOCKER_BIN ?= docker
 
 # Build docker container for local development

@@ -37,9 +37,12 @@ module "project" {
 }
 
 locals {
-  random_suffix = var.random_suffix ? "-${random_string.name_suffix.result}" : ""
-  network_name  = "${var.network_name}${local.random_suffix}"
-  router_name   = "router-${var.network_name}${local.random_suffix}"
+  random_suffix    = var.random_suffix ? "-${random_string.name_suffix.result}" : ""
+  network_name     = "${var.network_name}${local.random_suffix}"
+  router_name      = "router-${var.network_name}${local.random_suffix}"
+  iap_firewall     = "sap-iap${local.random_suffix}"
+  sap_firewall_all = "sap-allow-all${local.random_suffix}"
+  subnet_regions   = toset([for subnet in var.subnets : subnet.subnet_region])
 }
 
 resource "google_service_account" "sap_service_account" {
@@ -62,6 +65,12 @@ resource "google_storage_bucket_iam_member" "media_bucket_role" {
   role   = "roles/storage.admin"
 }
 
+resource "google_project_iam_member" "sap_sa_project_storage_role" {
+  member  = "serviceAccount:${google_service_account.sap_service_account.email}"
+  project = module.project.project_id
+  role    = "roles/storage.admin"
+}
+
 module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "~> 4.0"
@@ -77,7 +86,7 @@ module "vpc" {
 # Create firewall rule to allow communication b/w instances in subnet
 resource "google_compute_firewall" "sap_firewall_all" {
   project       = module.vpc.project_id
-  name          = "sap-allow-all-${random_string.name_suffix.result}"
+  name          = local.sap_firewall_all
   network       = module.vpc.network_name
   source_ranges = module.vpc.subnets_ips
   target_tags   = var.network_tags
@@ -88,11 +97,12 @@ resource "google_compute_firewall" "sap_firewall_all" {
 }
 
 module "cloud-nat" {
+  for_each      = local.subnet_regions
   source        = "terraform-google-modules/cloud-nat/google"
   version       = "~> 1.2"
   project_id    = module.project.project_id
-  region        = var.region
-  router        = local.router_name
+  region        = each.value
+  router        = "${local.router_name}-${each.value}"
   create_router = true
   network       = module.vpc.network_name
 }
@@ -108,7 +118,7 @@ resource "google_storage_bucket" "state_bucket" {
 # Create firewall rule to allow iap connection to SAP instances
 resource "google_compute_firewall" "iap" {
   project                 = module.vpc.project_id
-  name                    = "iap-${random_string.name_suffix.result}"
+  name                    = local.iap_firewall
   network                 = module.vpc.network_name
   source_ranges           = ["35.235.240.0/20"]
   target_service_accounts = [google_service_account.sap_service_account.email]

@@ -14,31 +14,33 @@
 
 # SSH-BASTION parameters for Cloud Build (required)
 
-sap_bastion_subnetwork: hana-scaleup-0
-sap_bastion_zone: us-west1-b
-sap_bastion_subnetwork_project_id: hana-scaleup-0-4e44
-sap_bastion_network: test-vpc-9sd1li
-sap_bastion_bucket_prefix: hanslbg-bastion
+sap_bastion_subnetwork: hana-scaleup
+sap_bastion_zone: "{{ lookup('env', 'SAP_REGION') }}-b"
+sap_bastion_subnetwork_project_id: "{{ lookup('env', 'SAP_PROJECT_ID') }}"
+sap_bastion_network: scaleup
+sap_bastion_bucket_prefix: "{{ lookup('env', 'SAP_TEST_ID') }}-bastion"
 
 # Terraform common vars for hana and netweaver (optional)
-sap_zone: us-west1-b
+sap_zone: "{{ lookup('env', 'SAP_REGION') }}-b"
+sap_hana_product_version: "{{ lookup('env', 'SAP_PRODUCT_ID') }}"
 
 # Terraform common vars for hana and netweaver (required)
 sap_ssh_priv_key: "/root/.ssh/id_rsa"
 sap_ssh_pub_key: "/root/.ssh/id_rsa.pub"
-sap_state: absent
+sap_state: "{{ lookup('env', 'SAP_STATE') }}"
 
-sap_project_id: hana-scaleup-0-4e44
-sap_source_image_family: rhel-7-7-sap-ha
-sap_source_image_project: rhel-sap-cloud
-sap_subnetwork_project_id: hana-scaleup-0-4e44
-sap_hana_subnetwork: hana-scaleup-0
-sap_tf_state_bucket: hana-scaleup-0-4e44-tf-state
-sap_tf_state_bucket_prefix: hanslbg
+sap_project_id: "{{ lookup('env', 'SAP_PROJECT_ID') }}"
+sap_source_image_family: "{{ lookup('env', 'SAP_IMAGE_FAMILY') }}"
+sap_source_image_project: "{{ lookup('env', 'SAP_IMAGE_PROJECT') }}"
+sap_subnetwork_project_id: "{{ lookup('env', 'SAP_PROJECT_ID') }}"
+sap_hana_subnetwork: hana-scaleup
+sap_tf_state_bucket: "{{ lookup('env', 'SAP_PROJECT_ID') }}-tf-state"
+sap_tf_state_bucket_prefix: "{{ lookup('env', 'SAP_TEST_ID') }}"
 
 # Terraform hana variables (required)
-sap_hana_install_files_bucket: hana-scaleup-0-4e44-media-bucket
-sap_hana_instance_name: hanslbg
+#sap_hana_install_files_bucket: "{{ lookup('env', 'SAP_PROJECT_ID') }}-media-bucket-{{ lookup('env', 'SAP_REGION') }}"
+sap_hana_install_files_bucket: "{{ lookup('env', 'SAP_PROJECT_ID') }}-media-bucket"
+sap_hana_instance_name: "ins-{{ lookup('env', 'SAP_TEST_ID') | lower }}"
 sap_hana_service_account_name: sap-sa-test
 
 # Terraform hana variables (optional)

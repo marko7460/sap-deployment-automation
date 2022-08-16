@@ -12,19 +12,11 @@
       },
       {
         "project": "suse-sap-cloud",
-        "family": "sles-12-sp3-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
         "family": "sles-12-sp4-sap"
       },
       {
         "project": "suse-sap-cloud",
         "family": "sles-12-sp5-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
-        "family": "sles-15-sap"
       },
       {
         "project": "suse-sap-cloud",
@@ -49,19 +41,11 @@
       },
       {
         "project": "suse-sap-cloud",
-        "family": "sles-12-sp3-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
         "family": "sles-12-sp4-sap"
       },
       {
         "project": "suse-sap-cloud",
         "family": "sles-12-sp5-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
-        "family": "sles-15-sap"
       },
       {
         "project": "suse-sap-cloud",
@@ -98,19 +82,11 @@
       },
       {
         "project": "suse-sap-cloud",
-        "family": "sles-12-sp3-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
         "family": "sles-12-sp4-sap"
       },
       {
         "project": "suse-sap-cloud",
         "family": "sles-12-sp5-sap"
-      },
-      {
-        "project": "suse-sap-cloud",
-        "family": "sles-15-sap"
       },
       {
         "project": "suse-sap-cloud",

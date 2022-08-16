@@ -15,10 +15,10 @@
 - name: Cleanup
   hosts: 127.0.0.1
   tasks:
-    - name: Run ssh-bastion terraform destroy
+    - name: Run ssh-bastion terraform init
       command:
         chdir: "{{ playbook_dir }}/../ssh-bastion"
-        cmd: terraform destroy -auto-approve
+        cmd: 'terraform init -backend-config="prefix={{ sap_bastion_bucket_prefix }}" -backend-config="bucket={{ sap_tf_state_bucket }}"'
       environment:
         TF_VAR_project: "{{ sap_project_id }}"
         TF_VAR_network: "{{ sap_bastion_network }}"
@@ -26,3 +26,16 @@
         TF_VAR_ssh_pub_key: "{{ sap_ssh_pub_key }}"
         TF_VAR_subnetwork: "{{ sap_bastion_subnetwork }}"
         TF_VAR_subnetwork_project_id: "{{ sap_bastion_subnetwork_project_id }}"
+        TF_VAR_bastion_instance_name: "ssh-{{ lookup('env', 'SAP_TEST_ID')| lower }}"
+    - name: Run ssh-bastion terraform destroy
+      command:
+        chdir: "{{ playbook_dir }}/../ssh-bastion"
+        cmd: terraform destroy -auto-approve -lock=false
+      environment:
+        TF_VAR_project: "{{ sap_project_id }}"
+        TF_VAR_network: "{{ sap_bastion_network }}"
+        TF_VAR_zone: "{{ sap_bastion_zone }}"
+        TF_VAR_ssh_pub_key: "{{ sap_ssh_pub_key }}"
+        TF_VAR_subnetwork: "{{ sap_bastion_subnetwork }}"
+        TF_VAR_subnetwork_project_id: "{{ sap_bastion_subnetwork_project_id }}"
+        TF_VAR_bastion_instance_name: "ssh-{{ lookup('env', 'SAP_TEST_ID') | lower }}"

@@ -18,6 +18,13 @@ variable "zone" {}
 variable "ssh_pub_key" {}
 variable "subnetwork" {}
 variable "subnetwork_project_id" {}
+variable "bastion_instance_name" {
+  default = "ssh-bastion-vm"
+}
+
+terraform {
+  backend "gcs" {}
+}
 
 module "test_setup" {
   source                = "../../terraform/modules/ssh-bastion"
@@ -27,6 +34,7 @@ module "test_setup" {
   public_ssh            = var.ssh_pub_key
   zone                  = var.zone
   subnetwork_project_id = var.subnetwork_project_id
+  bastion_instance_name = var.bastion_instance_name
 }
 
 output "bastion_ip" {

@@ -93,3 +93,8 @@ variable "bastion_instance_name" {
   default     = "bastion-vm-test-setup"
   description = "Bastion VM name"
 }
+
+variable "media_bucket" {
+  type        = string
+  description = "Source media bucket"
+}

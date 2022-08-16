@@ -25,27 +25,8 @@ steps:
   volumes:
     - name: 'hana-scaleup-{{ test.i }}'
       path: '/hana-scaleup-{{ test.i }}'
-- id: "{{ test.id }} - deploy"
+- id: "{{ test.id }} - forminator cleanup"
   waitFor: ['{{ test.id }} - setup files']
-  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-  env:
-    - 'SAP_PROJECT_ID=$_PROJECT_{{ test.product_id }}'
-    - 'SAP_STATE=present'
-    - 'SAP_PRODUCT_ID={{ test.product_id }}'
-    - 'SAP_IMAGE_PROJECT={{ test.project }}'
-    - 'SAP_IMAGE_FAMILY={{ test.family }}'
-    - 'SAP_TEST_ID={{ test.id }}'
-    - 'SAP_REGION={{ test.region }}'
-  args:
-    - ./deploy.sh
-    - stacks/HANA-Scaleup/playbook.yml
-    - stacks/HANA-Scaleup/vars/deploy-vars-cloud-build.yml
-  dir: '/hana-scaleup-{{ test.i }}/'
-  volumes:
-    - name: 'hana-scaleup-{{ test.i }}'
-      path: '/hana-scaleup-{{ test.i }}'
-- id: "{{ test.id }} - test cleanup"
-  waitFor: ['{{ test.id }} - deploy']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   env:
     - 'SAP_PROJECT_ID=$_PROJECT_{{ test.product_id }}'
@@ -66,7 +47,7 @@ steps:
 {% endfor %}
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.2'
 options:
   machineType: 'N1_HIGHCPU_32'
 
