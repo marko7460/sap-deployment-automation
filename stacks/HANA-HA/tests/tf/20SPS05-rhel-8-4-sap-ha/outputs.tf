@@ -1,1 +1,0 @@
-../forminator_tf/outputs.tf

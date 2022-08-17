@@ -44,8 +44,13 @@ if [ "$rc" != "0" ]; then
   exit $rc
 fi
 
+if [ -z "$3" ]; then
+  retry=1;
+else
+  retry=$3
+fi
 # retry playbook in case of a failure
-for i in 1; do
+for i in $(seq 1 $retry); do
   echo ansible-playbook "$1" -e @"$2"
   # shellcheck disable=SC2068
   ansible-playbook -v "$1" -e @"$2"
