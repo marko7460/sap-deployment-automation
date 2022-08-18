@@ -19,7 +19,6 @@ module "hana_scaleup_20sps03" {
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  media_bucket       = var.media_bucket
   network_name       = "scaleup"
   subnets = [
     {
@@ -104,7 +103,6 @@ module "hana_scaleup_20sps04" {
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  media_bucket       = var.media_bucket
   network_name       = "scaleup"
   subnets = [
     {
@@ -190,7 +188,6 @@ module "hana_scaleup_20sps05" {
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  media_bucket       = var.media_bucket
   network_name       = "scaleup"
   subnets = [
     {

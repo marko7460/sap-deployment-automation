@@ -12,255 +12,255 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "hana_ha_20sps03" {
+module "nw_db2_std_105FP9" {
   source             = "../../modules/test-setup"
-  project_name       = "hana-ha-20sps03"
+  project_name       = "nw-db2-std-105fp9"
   random_suffix      = false
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  network_name       = "hana-ha"
+  network_name       = "nw-db2"
   subnets = [
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.0.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.0.0/24"
       subnet_region         = "us-west1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.1.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "11.10.1.0/24"
       subnet_region         = "us-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.2.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.2.0/24"
       subnet_region         = "us-central1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.3.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.3.0/24"
       subnet_region         = "us-east1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.4.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.4.0/24"
       subnet_region         = "us-east4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.5.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.5.0/24"
       subnet_region         = "northamerica-northeast1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.6.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.6.0/24"
       subnet_region         = "us-west3"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.7.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.7.0/24"
       subnet_region         = "us-west4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.8.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.8.0/24"
       subnet_region         = "europe-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.9.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.9.0/24"
       subnet_region         = "europe-west1"
       subnet_private_access = true
     },
   ]
 }
 
-resource "null_resource" "copy_install_media_hana_ha_20sps03" {
+resource "null_resource" "copy_install_media_nw_db2_std_105FP9" {
   triggers = {
     id = md5(var.billing_account_id)
   }
   provisioner "local-exec" {
     command = <<EOT
-gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.hana_ha_20sps03.media_bucket}/
+gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.nw_db2_std_105FP9.media_bucket}/
 EOT
   }
-  depends_on = [module.hana_ha_20sps03]
+  depends_on = [module.nw_db2_std_105FP9]
 }
 
-module "hana_ha_20sps04" {
+module "nw_db2_std_111MP4FP6" {
   source             = "../../modules/test-setup"
-  project_name       = "hana-ha-20sps04"
+  project_name       = "nw-db2-std-111mp4fp6"
   random_suffix      = false
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  network_name       = "hana-ha"
+  network_name       = "nw-db2"
   subnets = [
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.10.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.10.0/24"
       subnet_region         = "us-west1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.11.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.11.0/24"
       subnet_region         = "us-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.12.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.12.0/24"
       subnet_region         = "us-central1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.13.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.13.0/24"
       subnet_region         = "us-east1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.14.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.14.0/24"
       subnet_region         = "us-east4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.15.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.15.0/24"
       subnet_region         = "northamerica-northeast1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.16.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.16.0/24"
       subnet_region         = "us-west3"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.17.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.17.0/24"
       subnet_region         = "us-west4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.18.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.18.0/24"
       subnet_region         = "europe-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.19.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.19.0/24"
       subnet_region         = "europe-west1"
       subnet_private_access = true
     },
   ]
 }
 
-resource "null_resource" "copy_install_media_hana_ha_20sps04" {
+resource "null_resource" "copy_install_media_nw_db2_std_111MP4FP6" {
   triggers = {
     id = md5(var.billing_account_id)
   }
   provisioner "local-exec" {
     command = <<EOT
-gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.hana_ha_20sps04.media_bucket}/
+gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.nw_db2_std_111MP4FP6.media_bucket}/
 EOT
   }
-  depends_on = [module.hana_ha_20sps04]
+  depends_on = [module.nw_db2_std_111MP4FP6]
 }
 
 
-module "hana_ha_20sps05" {
+module "nw_db2_std_115MP5FP1" {
   source             = "../../modules/test-setup"
-  project_name       = "hana-ha-20sps05"
+  project_name       = "nw-db2-std-115mp5fp1"
   random_suffix      = false
   org_id             = var.org_id
   folder_id          = var.folder_id
   billing_account_id = var.billing_account_id
-  network_name       = "hana-ha"
+  network_name       = "nw-db2"
   subnets = [
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.20.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.20.0/24"
       subnet_region         = "us-west1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.21.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.21.0/24"
       subnet_region         = "us-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.22.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.22.0/24"
       subnet_region         = "us-central1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.23.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.23.0/24"
       subnet_region         = "us-east1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.24.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.24.0/24"
       subnet_region         = "us-east4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.25.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.25.0/24"
       subnet_region         = "northamerica-northeast1"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.26.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.26.0/24"
       subnet_region         = "us-west3"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.27.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.27.0/24"
       subnet_region         = "us-west4"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.28.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.28.0/24"
       subnet_region         = "europe-west2"
       subnet_private_access = true
     },
     {
-      subnet_name           = "hana-ha"
-      subnet_ip             = "10.10.29.0/24"
+      subnet_name           = "nw-db2"
+      subnet_ip             = "10.11.29.0/24"
       subnet_region         = "europe-west1"
       subnet_private_access = true
     },
   ]
 }
 
-resource "null_resource" "copy_install_media_hana_ha_20sps05" {
+resource "null_resource" "copy_install_media_nw_db2_std_115MP5FP1" {
   triggers = {
     id = md5(var.billing_account_id)
   }
   provisioner "local-exec" {
     command = <<EOT
-gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.hana_ha_20sps05.media_bucket}/
+gsutil -q -m cp -r  gs://${var.media_bucket}/* gs://${module.nw_db2_std_115MP5FP1.media_bucket}/
 EOT
   }
-  depends_on = [module.hana_ha_20sps05]
+  depends_on = [module.nw_db2_std_115MP5FP1]
 }

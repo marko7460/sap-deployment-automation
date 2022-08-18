@@ -36,6 +36,12 @@ module "project" {
   ]
 }
 
+resource "google_compute_project_metadata_item" "vm_dns_setting" {
+  project = module.project.project_id
+  key     = "VmDnsSetting"
+  value   = "ZonalPreferred"
+}
+
 locals {
   random_suffix    = var.random_suffix ? "-${random_string.name_suffix.result}" : ""
   network_name     = "${var.network_name}${local.random_suffix}"
@@ -59,16 +65,23 @@ resource "google_storage_bucket" "media_bucket" {
   force_destroy               = true
 }
 
-resource "google_storage_bucket_iam_member" "media_bucket_role" {
-  bucket = google_storage_bucket.media_bucket.name
-  member = "serviceAccount:${google_service_account.sap_service_account.email}"
-  role   = "roles/storage.admin"
-}
 
-resource "google_project_iam_member" "sap_sa_project_storage_role" {
-  member  = "serviceAccount:${google_service_account.sap_service_account.email}"
+resource "google_project_iam_member" "sap_sa_project_roles" {
+  for_each = toset([
+    "roles/compute.admin",
+    "roles/compute.instanceAdmin.v1",
+    "roles/compute.networkUser",
+    "roles/compute.securityAdmin",
+    "roles/iam.serviceAccountCreator",
+    "roles/iam.serviceAccountUser",
+    "roles/compute.networkAdmin",
+    "roles/source.reader",
+    "roles/storage.objectAdmin",
+    "roles/storage.admin"
+  ])
   project = module.project.project_id
-  role    = "roles/storage.admin"
+  role    = each.value
+  member  = "serviceAccount:${google_service_account.sap_service_account.email}"
 }
 
 module "vpc" {
