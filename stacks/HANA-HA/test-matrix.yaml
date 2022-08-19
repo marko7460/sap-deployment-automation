@@ -25,11 +25,11 @@
       region: us-east4
       primary_zone: us-east4-b
       secondary_zone: us-east4-c
-    - project: suse-sap-cloud
-      family: sles-15-sp2-sap
-      region: us-west2
-      primary_zone: us-west2-b
-      secondary_zone: us-west2-c
+#    - project: suse-sap-cloud
+#      family: sles-15-sp2-sap
+#      region: us-west2
+#      primary_zone: us-west2-b
+#      secondary_zone: us-west2-c
     - project: suse-sap-cloud
       family: sles-15-sp3-sap
       region: us-west3
