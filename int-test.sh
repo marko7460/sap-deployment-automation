@@ -38,12 +38,12 @@ finish() {
   else
     echo $rc > /workspace/.results/$SAP_TEST_ID
     ls -l /workspace/.results/
-    total_tests_completed=$(ls /workspace/results/|wc -l)
+    total_tests_completed=$(ls /workspace/.results/|wc -l)
     while [ $total_tests_completed -lt $TOTAL_TESTS ]
     do
       echo "Waiting for the rest of the tests to finish"
       sleep 10
-      total_tests_completed=$(ls /workspace/results/|wc -l)
+      total_tests_completed=$(ls /workspace/.results/|wc -l)
     done
   fi
 
