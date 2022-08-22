@@ -47,27 +47,6 @@ steps:
   volumes:
     - name: 'hana-ha-0'
       path: '/hana-ha-0'
-#- id: "20SPS03-rhel-7-6-sap-ha - test cleanup"
-#  waitFor: ['20SPS03-rhel-7-6-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-6-sap-ha'
-#    - 'SAP_TEST_ID=20SPS03-rhel-7-6-sap-ha'
-#    - 'SAP_REGION=us-central1'
-#    - 'SAP_PRIMARY_ZONE=us-central1-b'
-#    - 'SAP_SECONDARY_ZONE=us-central1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-0/'
-#  volumes:
-#    - name: 'hana-ha-0'
-#      path: '/hana-ha-0'
 
 - id: "20SPS03-rhel-7-7-sap-ha - setup files"
   waitFor: ["-"]
@@ -102,27 +81,6 @@ steps:
   volumes:
     - name: 'hana-ha-1'
       path: '/hana-ha-1'
-#- id: "20SPS03-rhel-7-7-sap-ha - test cleanup"
-#  waitFor: ['20SPS03-rhel-7-7-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-7-sap-ha'
-#    - 'SAP_TEST_ID=20SPS03-rhel-7-7-sap-ha'
-#    - 'SAP_REGION=europe-west1'
-#    - 'SAP_PRIMARY_ZONE=europe-west1-b'
-#    - 'SAP_SECONDARY_ZONE=europe-west1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-1/'
-#  volumes:
-#    - name: 'hana-ha-1'
-#      path: '/hana-ha-1'
 
 - id: "20SPS03-sles-12-sp4-sap - setup files"
   waitFor: ["-"]
@@ -157,27 +115,6 @@ steps:
   volumes:
     - name: 'hana-ha-2'
       path: '/hana-ha-2'
-#- id: "20SPS03-sles-12-sp4-sap - test cleanup"
-#  waitFor: ['20SPS03-sles-12-sp4-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp4-sap'
-#    - 'SAP_TEST_ID=20SPS03-sles-12-sp4-sap'
-#    - 'SAP_REGION=us-west1'
-#    - 'SAP_PRIMARY_ZONE=us-west1-b'
-#    - 'SAP_SECONDARY_ZONE=us-west1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-2/'
-#  volumes:
-#    - name: 'hana-ha-2'
-#      path: '/hana-ha-2'
 
 - id: "20SPS03-sles-12-sp5-sap - setup files"
   waitFor: ["-"]
@@ -212,27 +149,6 @@ steps:
   volumes:
     - name: 'hana-ha-3'
       path: '/hana-ha-3'
-#- id: "20SPS03-sles-12-sp5-sap - test cleanup"
-#  waitFor: ['20SPS03-sles-12-sp5-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp5-sap'
-#    - 'SAP_TEST_ID=20SPS03-sles-12-sp5-sap'
-#    - 'SAP_REGION=us-east1'
-#    - 'SAP_PRIMARY_ZONE=us-east1-b'
-#    - 'SAP_SECONDARY_ZONE=us-east1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-3/'
-#  volumes:
-#    - name: 'hana-ha-3'
-#      path: '/hana-ha-3'
 
 - id: "20SPS03-sles-15-sp1-sap - setup files"
   waitFor: ["-"]
@@ -267,29 +183,8 @@ steps:
   volumes:
     - name: 'hana-ha-4'
       path: '/hana-ha-4'
-#- id: "20SPS03-sles-15-sp1-sap - test cleanup"
-#  waitFor: ['20SPS03-sles-15-sp1-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp1-sap'
-#    - 'SAP_TEST_ID=20SPS03-sles-15-sp1-sap'
-#    - 'SAP_REGION=us-east4'
-#    - 'SAP_PRIMARY_ZONE=us-east4-b'
-#    - 'SAP_SECONDARY_ZONE=us-east4-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-4/'
-#  volumes:
-#    - name: 'hana-ha-4'
-#      path: '/hana-ha-4'
 
-- id: "20SPS03-sles-15-sp2-sap - setup files"
+- id: "20SPS03-sles-15-sp3-sap - setup files"
   waitFor: ["-"]
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   args:
@@ -300,61 +195,6 @@ steps:
   volumes:
     - name: 'hana-ha-5'
       path: '/hana-ha-5'
-- id: "20SPS03-sles-15-sp2-sap - deploy"
-  waitFor: ['20SPS03-sles-15-sp2-sap - setup files']
-  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-  env:
-    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-    - 'SAP_STATE=present'
-    - 'SAP_PRODUCT_ID=20SPS03'
-    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-    - 'SAP_IMAGE_FAMILY=sles-15-sp2-sap'
-    - 'SAP_TEST_ID=20SPS03-sles-15-sp2-sap'
-    - 'SAP_REGION=us-west2'
-    - 'SAP_PRIMARY_ZONE=us-west2-b'
-    - 'SAP_SECONDARY_ZONE=us-west2-c'
-  args:
-    - ./int-test.sh
-    - stacks/HANA-HA/playbook.yml
-    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-    - "3"
-  dir: '/hana-ha-5/'
-  volumes:
-    - name: 'hana-ha-5'
-      path: '/hana-ha-5'
-#- id: "20SPS03-sles-15-sp2-sap - test cleanup"
-#  waitFor: ['20SPS03-sles-15-sp2-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp2-sap'
-#    - 'SAP_TEST_ID=20SPS03-sles-15-sp2-sap'
-#    - 'SAP_REGION=us-west2'
-#    - 'SAP_PRIMARY_ZONE=us-west2-b'
-#    - 'SAP_SECONDARY_ZONE=us-west2-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-5/'
-#  volumes:
-#    - name: 'hana-ha-5'
-#      path: '/hana-ha-5'
-
-- id: "20SPS03-sles-15-sp3-sap - setup files"
-  waitFor: ["-"]
-  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-  args:
-    - cp
-    - "-r"
-    - "."
-    - "/hana-ha-6"
-  volumes:
-    - name: 'hana-ha-6'
-      path: '/hana-ha-6'
 - id: "20SPS03-sles-15-sp3-sap - deploy"
   waitFor: ['20SPS03-sles-15-sp3-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -373,31 +213,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-6/'
+  dir: '/hana-ha-5/'
   volumes:
-    - name: 'hana-ha-6'
-      path: '/hana-ha-6'
-#- id: "20SPS03-sles-15-sp3-sap - test cleanup"
-#  waitFor: ['20SPS03-sles-15-sp3-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS03'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS03'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp3-sap'
-#    - 'SAP_TEST_ID=20SPS03-sles-15-sp3-sap'
-#    - 'SAP_REGION=us-west3'
-#    - 'SAP_PRIMARY_ZONE=us-west3-b'
-#    - 'SAP_SECONDARY_ZONE=us-west3-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-6/'
-#  volumes:
-#    - name: 'hana-ha-6'
-#      path: '/hana-ha-6'
+    - name: 'hana-ha-5'
+      path: '/hana-ha-5'
 
 - id: "20SPS04-rhel-7-6-sap-ha - setup files"
   waitFor: ["-"]
@@ -406,10 +225,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-7"
+    - "/hana-ha-6"
   volumes:
-    - name: 'hana-ha-7'
-      path: '/hana-ha-7'
+    - name: 'hana-ha-6'
+      path: '/hana-ha-6'
 - id: "20SPS04-rhel-7-6-sap-ha - deploy"
   waitFor: ['20SPS04-rhel-7-6-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -428,31 +247,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-7/'
+  dir: '/hana-ha-6/'
   volumes:
-    - name: 'hana-ha-7'
-      path: '/hana-ha-7'
-#- id: "20SPS04-rhel-7-6-sap-ha - test cleanup"
-#  waitFor: ['20SPS04-rhel-7-6-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-6-sap-ha'
-#    - 'SAP_TEST_ID=20SPS04-rhel-7-6-sap-ha'
-#    - 'SAP_REGION=us-west3'
-#    - 'SAP_PRIMARY_ZONE=us-west3-b'
-#    - 'SAP_SECONDARY_ZONE=us-west3-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-7/'
-#  volumes:
-#    - name: 'hana-ha-7'
-#      path: '/hana-ha-7'
+    - name: 'hana-ha-6'
+      path: '/hana-ha-6'
 
 - id: "20SPS04-rhel-7-7-sap-ha - setup files"
   waitFor: ["-"]
@@ -461,10 +259,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-8"
+    - "/hana-ha-7"
   volumes:
-    - name: 'hana-ha-8'
-      path: '/hana-ha-8'
+    - name: 'hana-ha-7'
+      path: '/hana-ha-7'
 - id: "20SPS04-rhel-7-7-sap-ha - deploy"
   waitFor: ['20SPS04-rhel-7-7-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -483,31 +281,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-8/'
+  dir: '/hana-ha-7/'
   volumes:
-    - name: 'hana-ha-8'
-      path: '/hana-ha-8'
-#- id: "20SPS04-rhel-7-7-sap-ha - test cleanup"
-#  waitFor: ['20SPS04-rhel-7-7-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-7-sap-ha'
-#    - 'SAP_TEST_ID=20SPS04-rhel-7-7-sap-ha'
-#    - 'SAP_REGION=us-west4'
-#    - 'SAP_PRIMARY_ZONE=us-west4-b'
-#    - 'SAP_SECONDARY_ZONE=us-west4-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-8/'
-#  volumes:
-#    - name: 'hana-ha-8'
-#      path: '/hana-ha-8'
+    - name: 'hana-ha-7'
+      path: '/hana-ha-7'
 
 - id: "20SPS04-sles-12-sp4-sap - setup files"
   waitFor: ["-"]
@@ -516,10 +293,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-9"
+    - "/hana-ha-8"
   volumes:
-    - name: 'hana-ha-9'
-      path: '/hana-ha-9'
+    - name: 'hana-ha-8'
+      path: '/hana-ha-8'
 - id: "20SPS04-sles-12-sp4-sap - deploy"
   waitFor: ['20SPS04-sles-12-sp4-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -538,31 +315,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-9/'
+  dir: '/hana-ha-8/'
   volumes:
-    - name: 'hana-ha-9'
-      path: '/hana-ha-9'
-#- id: "20SPS04-sles-12-sp4-sap - test cleanup"
-#  waitFor: ['20SPS04-sles-12-sp4-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp4-sap'
-#    - 'SAP_TEST_ID=20SPS04-sles-12-sp4-sap'
-#    - 'SAP_REGION=europe-west2'
-#    - 'SAP_PRIMARY_ZONE=europe-west2-b'
-#    - 'SAP_SECONDARY_ZONE=europe-west2-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-9/'
-#  volumes:
-#    - name: 'hana-ha-9'
-#      path: '/hana-ha-9'
+    - name: 'hana-ha-8'
+      path: '/hana-ha-8'
 
 - id: "20SPS04-sles-12-sp5-sap - setup files"
   waitFor: ["-"]
@@ -571,10 +327,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-10"
+    - "/hana-ha-9"
   volumes:
-    - name: 'hana-ha-10'
-      path: '/hana-ha-10'
+    - name: 'hana-ha-9'
+      path: '/hana-ha-9'
 - id: "20SPS04-sles-12-sp5-sap - deploy"
   waitFor: ['20SPS04-sles-12-sp5-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -593,31 +349,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-10/'
+  dir: '/hana-ha-9/'
   volumes:
-    - name: 'hana-ha-10'
-      path: '/hana-ha-10'
-#- id: "20SPS04-sles-12-sp5-sap - test cleanup"
-#  waitFor: ['20SPS04-sles-12-sp5-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp5-sap'
-#    - 'SAP_TEST_ID=20SPS04-sles-12-sp5-sap'
-#    - 'SAP_REGION=northamerica-northeast1'
-#    - 'SAP_PRIMARY_ZONE=northamerica-northeast1-b'
-#    - 'SAP_SECONDARY_ZONE=northamerica-northeast1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-10/'
-#  volumes:
-#    - name: 'hana-ha-10'
-#      path: '/hana-ha-10'
+    - name: 'hana-ha-9'
+      path: '/hana-ha-9'
 
 - id: "20SPS04-sles-15-sp1-sap - setup files"
   waitFor: ["-"]
@@ -626,10 +361,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-11"
+    - "/hana-ha-10"
   volumes:
-    - name: 'hana-ha-11'
-      path: '/hana-ha-11'
+    - name: 'hana-ha-10'
+      path: '/hana-ha-10'
 - id: "20SPS04-sles-15-sp1-sap - deploy"
   waitFor: ['20SPS04-sles-15-sp1-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -648,31 +383,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-11/'
+  dir: '/hana-ha-10/'
   volumes:
-    - name: 'hana-ha-11'
-      path: '/hana-ha-11'
-#- id: "20SPS04-sles-15-sp1-sap - test cleanup"
-#  waitFor: ['20SPS04-sles-15-sp1-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp1-sap'
-#    - 'SAP_TEST_ID=20SPS04-sles-15-sp1-sap'
-#    - 'SAP_REGION=us-central1'
-#    - 'SAP_PRIMARY_ZONE=us-central1-b'
-#    - 'SAP_SECONDARY_ZONE=us-central1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-11/'
-#  volumes:
-#    - name: 'hana-ha-11'
-#      path: '/hana-ha-11'
+    - name: 'hana-ha-10'
+      path: '/hana-ha-10'
 
 - id: "20SPS04-sles-15-sp2-sap - setup files"
   waitFor: ["-"]
@@ -681,10 +395,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-12"
+    - "/hana-ha-11"
   volumes:
-    - name: 'hana-ha-12'
-      path: '/hana-ha-12'
+    - name: 'hana-ha-11'
+      path: '/hana-ha-11'
 - id: "20SPS04-sles-15-sp2-sap - deploy"
   waitFor: ['20SPS04-sles-15-sp2-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -703,31 +417,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-12/'
+  dir: '/hana-ha-11/'
   volumes:
-    - name: 'hana-ha-12'
-      path: '/hana-ha-12'
-#- id: "20SPS04-sles-15-sp2-sap - test cleanup"
-#  waitFor: ['20SPS04-sles-15-sp2-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp2-sap'
-#    - 'SAP_TEST_ID=20SPS04-sles-15-sp2-sap'
-#    - 'SAP_REGION=europe-west1'
-#    - 'SAP_PRIMARY_ZONE=europe-west1-b'
-#    - 'SAP_SECONDARY_ZONE=europe-west1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-12/'
-#  volumes:
-#    - name: 'hana-ha-12'
-#      path: '/hana-ha-12'
+    - name: 'hana-ha-11'
+      path: '/hana-ha-11'
 
 - id: "20SPS04-sles-15-sp3-sap - setup files"
   waitFor: ["-"]
@@ -736,10 +429,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-13"
+    - "/hana-ha-12"
   volumes:
-    - name: 'hana-ha-13'
-      path: '/hana-ha-13'
+    - name: 'hana-ha-12'
+      path: '/hana-ha-12'
 - id: "20SPS04-sles-15-sp3-sap - deploy"
   waitFor: ['20SPS04-sles-15-sp3-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -758,31 +451,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-13/'
+  dir: '/hana-ha-12/'
   volumes:
-    - name: 'hana-ha-13'
-      path: '/hana-ha-13'
-#- id: "20SPS04-sles-15-sp3-sap - test cleanup"
-#  waitFor: ['20SPS04-sles-15-sp3-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS04'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS04'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp3-sap'
-#    - 'SAP_TEST_ID=20SPS04-sles-15-sp3-sap'
-#    - 'SAP_REGION=us-west2'
-#    - 'SAP_PRIMARY_ZONE=us-west2-b'
-#    - 'SAP_SECONDARY_ZONE=us-west2-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-13/'
-#  volumes:
-#    - name: 'hana-ha-13'
-#      path: '/hana-ha-13'
+    - name: 'hana-ha-12'
+      path: '/hana-ha-12'
 
 - id: "20SPS05-rhel-7-6-sap-ha - setup files"
   waitFor: ["-"]
@@ -791,10 +463,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-14"
+    - "/hana-ha-13"
   volumes:
-    - name: 'hana-ha-14'
-      path: '/hana-ha-14'
+    - name: 'hana-ha-13'
+      path: '/hana-ha-13'
 - id: "20SPS05-rhel-7-6-sap-ha - deploy"
   waitFor: ['20SPS05-rhel-7-6-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -813,31 +485,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-14/'
+  dir: '/hana-ha-13/'
   volumes:
-    - name: 'hana-ha-14'
-      path: '/hana-ha-14'
-#- id: "20SPS05-rhel-7-6-sap-ha - test cleanup"
-#  waitFor: ['20SPS05-rhel-7-6-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-6-sap-ha'
-#    - 'SAP_TEST_ID=20SPS05-rhel-7-6-sap-ha'
-#    - 'SAP_REGION=us-west1'
-#    - 'SAP_PRIMARY_ZONE=us-west1-b'
-#    - 'SAP_SECONDARY_ZONE=us-west1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-14/'
-#  volumes:
-#    - name: 'hana-ha-14'
-#      path: '/hana-ha-14'
+    - name: 'hana-ha-13'
+      path: '/hana-ha-13'
 
 - id: "20SPS05-rhel-7-7-sap-ha - setup files"
   waitFor: ["-"]
@@ -846,10 +497,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-15"
+    - "/hana-ha-14"
   volumes:
-    - name: 'hana-ha-15'
-      path: '/hana-ha-15'
+    - name: 'hana-ha-14'
+      path: '/hana-ha-14'
 - id: "20SPS05-rhel-7-7-sap-ha - deploy"
   waitFor: ['20SPS05-rhel-7-7-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -868,31 +519,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-15/'
+  dir: '/hana-ha-14/'
   volumes:
-    - name: 'hana-ha-15'
-      path: '/hana-ha-15'
-#- id: "20SPS05-rhel-7-7-sap-ha - test cleanup"
-#  waitFor: ['20SPS05-rhel-7-7-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-7-7-sap-ha'
-#    - 'SAP_TEST_ID=20SPS05-rhel-7-7-sap-ha'
-#    - 'SAP_REGION=us-east1'
-#    - 'SAP_PRIMARY_ZONE=us-east1-b'
-#    - 'SAP_SECONDARY_ZONE=us-east1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-15/'
-#  volumes:
-#    - name: 'hana-ha-15'
-#      path: '/hana-ha-15'
+    - name: 'hana-ha-14'
+      path: '/hana-ha-14'
 
 - id: "20SPS05-rhel-8-1-sap-ha - setup files"
   waitFor: ["-"]
@@ -901,10 +531,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-16"
+    - "/hana-ha-15"
   volumes:
-    - name: 'hana-ha-16'
-      path: '/hana-ha-16'
+    - name: 'hana-ha-15'
+      path: '/hana-ha-15'
 - id: "20SPS05-rhel-8-1-sap-ha - deploy"
   waitFor: ['20SPS05-rhel-8-1-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -923,31 +553,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-16/'
+  dir: '/hana-ha-15/'
   volumes:
-    - name: 'hana-ha-16'
-      path: '/hana-ha-16'
-#- id: "20SPS05-rhel-8-1-sap-ha - test cleanup"
-#  waitFor: ['20SPS05-rhel-8-1-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-8-1-sap-ha'
-#    - 'SAP_TEST_ID=20SPS05-rhel-8-1-sap-ha'
-#    - 'SAP_REGION=us-east4'
-#    - 'SAP_PRIMARY_ZONE=us-east4-b'
-#    - 'SAP_SECONDARY_ZONE=us-east4-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-16/'
-#  volumes:
-#    - name: 'hana-ha-16'
-#      path: '/hana-ha-16'
+    - name: 'hana-ha-15'
+      path: '/hana-ha-15'
 
 - id: "20SPS05-rhel-8-2-sap-ha - setup files"
   waitFor: ["-"]
@@ -956,10 +565,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-17"
+    - "/hana-ha-16"
   volumes:
-    - name: 'hana-ha-17'
-      path: '/hana-ha-17'
+    - name: 'hana-ha-16'
+      path: '/hana-ha-16'
 - id: "20SPS05-rhel-8-2-sap-ha - deploy"
   waitFor: ['20SPS05-rhel-8-2-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -978,31 +587,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-17/'
+  dir: '/hana-ha-16/'
   volumes:
-    - name: 'hana-ha-17'
-      path: '/hana-ha-17'
-#- id: "20SPS05-rhel-8-2-sap-ha - test cleanup"
-#  waitFor: ['20SPS05-rhel-8-2-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-8-2-sap-ha'
-#    - 'SAP_TEST_ID=20SPS05-rhel-8-2-sap-ha'
-#    - 'SAP_REGION=us-west2'
-#    - 'SAP_PRIMARY_ZONE=us-west2-b'
-#    - 'SAP_SECONDARY_ZONE=us-west2-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-17/'
-#  volumes:
-#    - name: 'hana-ha-17'
-#      path: '/hana-ha-17'
+    - name: 'hana-ha-16'
+      path: '/hana-ha-16'
 
 - id: "20SPS05-rhel-8-4-sap-ha - setup files"
   waitFor: ["-"]
@@ -1011,10 +599,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-18"
+    - "/hana-ha-17"
   volumes:
-    - name: 'hana-ha-18'
-      path: '/hana-ha-18'
+    - name: 'hana-ha-17'
+      path: '/hana-ha-17'
 - id: "20SPS05-rhel-8-4-sap-ha - deploy"
   waitFor: ['20SPS05-rhel-8-4-sap-ha - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1033,31 +621,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-18/'
+  dir: '/hana-ha-17/'
   volumes:
-    - name: 'hana-ha-18'
-      path: '/hana-ha-18'
-#- id: "20SPS05-rhel-8-4-sap-ha - test cleanup"
-#  waitFor: ['20SPS05-rhel-8-4-sap-ha - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=rhel-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=rhel-8-4-sap-ha'
-#    - 'SAP_TEST_ID=20SPS05-rhel-8-4-sap-ha'
-#    - 'SAP_REGION=us-west3'
-#    - 'SAP_PRIMARY_ZONE=us-west3-b'
-#    - 'SAP_SECONDARY_ZONE=us-west3-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-18/'
-#  volumes:
-#    - name: 'hana-ha-18'
-#      path: '/hana-ha-18'
+    - name: 'hana-ha-17'
+      path: '/hana-ha-17'
 
 - id: "20SPS05-sles-12-sp4-sap - setup files"
   waitFor: ["-"]
@@ -1066,10 +633,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-19"
+    - "/hana-ha-18"
   volumes:
-    - name: 'hana-ha-19'
-      path: '/hana-ha-19'
+    - name: 'hana-ha-18'
+      path: '/hana-ha-18'
 - id: "20SPS05-sles-12-sp4-sap - deploy"
   waitFor: ['20SPS05-sles-12-sp4-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1088,31 +655,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-19/'
+  dir: '/hana-ha-18/'
   volumes:
-    - name: 'hana-ha-19'
-      path: '/hana-ha-19'
-#- id: "20SPS05-sles-12-sp4-sap - test cleanup"
-#  waitFor: ['20SPS05-sles-12-sp4-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp4-sap'
-#    - 'SAP_TEST_ID=20SPS05-sles-12-sp4-sap'
-#    - 'SAP_REGION=us-west4'
-#    - 'SAP_PRIMARY_ZONE=us-west4-b'
-#    - 'SAP_SECONDARY_ZONE=us-west4-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-19/'
-#  volumes:
-#    - name: 'hana-ha-19'
-#      path: '/hana-ha-19'
+    - name: 'hana-ha-18'
+      path: '/hana-ha-18'
 
 - id: "20SPS05-sles-12-sp5-sap - setup files"
   waitFor: ["-"]
@@ -1121,10 +667,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-20"
+    - "/hana-ha-19"
   volumes:
-    - name: 'hana-ha-20'
-      path: '/hana-ha-20'
+    - name: 'hana-ha-19'
+      path: '/hana-ha-19'
 - id: "20SPS05-sles-12-sp5-sap - deploy"
   waitFor: ['20SPS05-sles-12-sp5-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1143,31 +689,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-20/'
+  dir: '/hana-ha-19/'
   volumes:
-    - name: 'hana-ha-20'
-      path: '/hana-ha-20'
-#- id: "20SPS05-sles-12-sp5-sap - test cleanup"
-#  waitFor: ['20SPS05-sles-12-sp5-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-12-sp5-sap'
-#    - 'SAP_TEST_ID=20SPS05-sles-12-sp5-sap'
-#    - 'SAP_REGION=europe-west2'
-#    - 'SAP_PRIMARY_ZONE=europe-west2-b'
-#    - 'SAP_SECONDARY_ZONE=europe-west2-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-20/'
-#  volumes:
-#    - name: 'hana-ha-20'
-#      path: '/hana-ha-20'
+    - name: 'hana-ha-19'
+      path: '/hana-ha-19'
 
 - id: "20SPS05-sles-15-sp1-sap - setup files"
   waitFor: ["-"]
@@ -1176,10 +701,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-21"
+    - "/hana-ha-20"
   volumes:
-    - name: 'hana-ha-21'
-      path: '/hana-ha-21'
+    - name: 'hana-ha-20'
+      path: '/hana-ha-20'
 - id: "20SPS05-sles-15-sp1-sap - deploy"
   waitFor: ['20SPS05-sles-15-sp1-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1198,31 +723,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-21/'
+  dir: '/hana-ha-20/'
   volumes:
-    - name: 'hana-ha-21'
-      path: '/hana-ha-21'
-#- id: "20SPS05-sles-15-sp1-sap - test cleanup"
-#  waitFor: ['20SPS05-sles-15-sp1-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp1-sap'
-#    - 'SAP_TEST_ID=20SPS05-sles-15-sp1-sap'
-#    - 'SAP_REGION=northamerica-northeast1'
-#    - 'SAP_PRIMARY_ZONE=northamerica-northeast1-b'
-#    - 'SAP_SECONDARY_ZONE=northamerica-northeast1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-21/'
-#  volumes:
-#    - name: 'hana-ha-21'
-#      path: '/hana-ha-21'
+    - name: 'hana-ha-20'
+      path: '/hana-ha-20'
 
 - id: "20SPS05-sles-15-sp2-sap - setup files"
   waitFor: ["-"]
@@ -1231,10 +735,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-22"
+    - "/hana-ha-21"
   volumes:
-    - name: 'hana-ha-22'
-      path: '/hana-ha-22'
+    - name: 'hana-ha-21'
+      path: '/hana-ha-21'
 - id: "20SPS05-sles-15-sp2-sap - deploy"
   waitFor: ['20SPS05-sles-15-sp2-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1253,31 +757,10 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-22/'
+  dir: '/hana-ha-21/'
   volumes:
-    - name: 'hana-ha-22'
-      path: '/hana-ha-22'
-#- id: "20SPS05-sles-15-sp2-sap - test cleanup"
-#  waitFor: ['20SPS05-sles-15-sp2-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp2-sap'
-#    - 'SAP_TEST_ID=20SPS05-sles-15-sp2-sap'
-#    - 'SAP_REGION=us-central1'
-#    - 'SAP_PRIMARY_ZONE=us-central1-b'
-#    - 'SAP_SECONDARY_ZONE=us-central1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-22/'
-#  volumes:
-#    - name: 'hana-ha-22'
-#      path: '/hana-ha-22'
+    - name: 'hana-ha-21'
+      path: '/hana-ha-21'
 
 - id: "20SPS05-sles-15-sp3-sap - setup files"
   waitFor: ["-"]
@@ -1286,10 +769,10 @@ steps:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-23"
+    - "/hana-ha-22"
   volumes:
-    - name: 'hana-ha-23'
-      path: '/hana-ha-23'
+    - name: 'hana-ha-22'
+      path: '/hana-ha-22'
 - id: "20SPS05-sles-15-sp3-sap - deploy"
   waitFor: ['20SPS05-sles-15-sp3-sap - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -1308,36 +791,15 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-23/'
+  dir: '/hana-ha-22/'
   volumes:
-    - name: 'hana-ha-23'
-      path: '/hana-ha-23'
-#- id: "20SPS05-sles-15-sp3-sap - test cleanup"
-#  waitFor: ['20SPS05-sles-15-sp3-sap - deploy']
-#  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-#  env:
-#    - 'SAP_PROJECT_ID=$_PROJECT_20SPS05'
-#    - 'SAP_STATE=absent'
-#    - 'SAP_PRODUCT_ID=20SPS05'
-#    - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
-#    - 'SAP_IMAGE_FAMILY=sles-15-sp3-sap'
-#    - 'SAP_TEST_ID=20SPS05-sles-15-sp3-sap'
-#    - 'SAP_REGION=europe-west1'
-#    - 'SAP_PRIMARY_ZONE=europe-west1-b'
-#    - 'SAP_SECONDARY_ZONE=europe-west1-c'
-#  args:
-#    - ./int-test.sh
-#    - stacks/HANA-HA/playbook.yml
-#    - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
-#  dir: '/hana-ha-23/'
-#  volumes:
-#    - name: 'hana-ha-23'
-#      path: '/hana-ha-23'
+    - name: 'hana-ha-22'
+      path: '/hana-ha-22'
 
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
 options:
   env:
-    - 'TOTAL_TESTS=24'
+    - 'TOTAL_TESTS=23'
   machineType: 'N1_HIGHCPU_32'
