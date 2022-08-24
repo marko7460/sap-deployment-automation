@@ -33,6 +33,7 @@
     - name: Run ssh-bastion terraform
       terraform:
         project_path: "{{ playbook_dir }}/../ssh-bastion"
+        binary_path: "/usr/local/bin/terraform_1.1.7"
         state: present
         force_init: true
         lock: false

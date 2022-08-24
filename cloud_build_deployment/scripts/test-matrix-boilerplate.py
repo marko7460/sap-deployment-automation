@@ -26,20 +26,23 @@ def parse_args():
 def main():
     args = parse_args()
     print(f'Creating {args.output} based on {args.matrix} test matrix and {args.template} template')
-    matrix = yaml.load(open(args.matrix, 'r'), Loader=yaml.FullLoader)
-    tests = []
-    i = 0
-    for test_group in matrix:
-        product_id = test_group['product_id']
-        for system in test_group['os']:
-            system['i'] = i
-            system['product_id'] = product_id
-            system['id'] = f'{product_id}-{system["family"]}'
-            tests.append(system)
-            print(f'Creating test {system["i"]}: product_id: {system["product_id"]} os: {system["family"]}')
-            i += 1
+    tests = yaml.load(open(args.matrix, 'r'), Loader=yaml.FullLoader)
+    # tests = []
+    # i = 0
+    # for test_group in matrix:
+    #     product_id = test_group['product_id']
+    #     nw_product = test_group.get('nw_product', None)
+    #     nw_version = test_group.get('nw_version', None)
+    #     for system in test_group['os']:
+    #         system['i'] = i
+    #         system['product_id'] = product_id
+    #         system['id'] = f'{product_id}-{system["family"]}'
+    #         tests.append(system)
+    #         print(f'Creating test {system["i"]}: product_id: {system["product_id"]} os: {system["family"]}')
+    #         i += 1
     make_cloud_build_conf(tests, args.template, args.output)
-    print(f"DONE\nResult in:{args.output}")
+    print(f"DONE\nTotal Tests: {len(tests)}")
+    print(f"Result in: {args.output}")
 
 
 main()

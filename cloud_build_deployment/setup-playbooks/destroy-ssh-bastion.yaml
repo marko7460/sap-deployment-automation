@@ -18,7 +18,7 @@
     - name: Run ssh-bastion terraform init
       command:
         chdir: "{{ playbook_dir }}/../ssh-bastion"
-        cmd: 'terraform init -backend-config="prefix={{ sap_bastion_bucket_prefix }}" -backend-config="bucket={{ sap_tf_state_bucket }}"'
+        cmd: '/usr/local/bin/terraform_1.1.7 init -backend-config="prefix={{ sap_bastion_bucket_prefix }}" -backend-config="bucket={{ sap_tf_state_bucket }}"'
       environment:
         TF_VAR_project: "{{ sap_project_id }}"
         TF_VAR_network: "{{ sap_bastion_network }}"
@@ -30,7 +30,7 @@
     - name: Run ssh-bastion terraform destroy
       command:
         chdir: "{{ playbook_dir }}/../ssh-bastion"
-        cmd: terraform destroy -auto-approve -lock=false
+        cmd: /usr/local/bin/terraform_1.1.7 destroy -auto-approve -lock=false
       environment:
         TF_VAR_project: "{{ sap_project_id }}"
         TF_VAR_network: "{{ sap_bastion_network }}"

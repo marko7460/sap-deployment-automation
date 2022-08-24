@@ -1,0 +1,105 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Required variables
+
+# Terraform state bucket.
+sap_tf_state_bucket:
+# Prefix for state file in Terraform state bucket.
+sap_tf_state_bucket_prefix:
+
+# Names for machine instances.
+sap_hana_instance_name:
+sap_ascs_instance_name:
+sap_ers_instance_name:
+sap_pas_instance_name:
+
+# Name given to HANA, ASCS, and ERS VIPs.
+sap_hana_virtual_host:
+sap_nw_ascs_virtual_host:
+sap_nw_ers_virtual_host:
+
+# Bucket containing installation files for HANA.
+sap_hana_install_files_bucket:
+
+# Bucket containing installation files for NetWeaver.
+sap_nw_install_files_bucket:
+
+# Project where resources are created.
+sap_project_id:
+
+# Subnetwork for nw network interfaces.
+sap_nw_subnetwork:
+
+# Subnetwork for hana network interfaces.
+sap_hana_subnetwork:
+
+# Password for HANA.
+sap_hana_password:
+# Password for NetWeaver.
+sap_nw_password:
+
+# Service account names for HANA and NetWeaver instances.
+sap_hana_service_account_name: sap-common-sa
+sap_nw_service_account_name: sap-common-sa
+
+# For NFS, define one of sap_nw_nfs_src or sap_nw_nfsvols, not both.
+#
+# NFS using one server, for example when using Cloud FileStore.
+# sap_nw_nfs_src: 10.10.10.10:/sap
+#
+# Multiple NFS servers may be used if sap_nw_nfsvols is set, for use with
+# NetApp Cloud Volumes or to give more control over mounts.
+# sap_nw_nfsvols:
+#   10.10.10.10:/sapmnt: /sapmnt
+#   10.10.10.11:/trans: /usr/sap/trans
+#   10.10.10.12:/ascs: /usr/sap/{{ sap_nw_sid }}/ASCS{{ sap_nw_ascs_instance_number }}
+#   10.10.10.13:/ers: /usr/sap/{{ sap_nw_sid }}/ERS{{ sap_nw_ers_instance_number }}
+
+# Optional variables.
+
+# sap_source_image_family: sles-12-sp5-sap
+# sap_source_image_project: suse-sap-cloud
+
+# Zone for HANA primary, ASCS, and PAS.
+# sap_primary_zone: us-central1-a
+# Zone for HANA secondary and ERS.
+# sap_secondary_zone: us-central1-b
+
+# Delete boot disks automatically.
+# sap_hana_autodelete_boot_disk: 'false'
+# sap_nw_autodelete_boot_disk: 'false'
+
+# sap_hana_instance_type: n1-highmem-32
+# sap_nw_instance_type: n1-standard-8
+
+# Bucket prefix for files in sap_nw_install_files_bucket.
+# sap_nw_install_files_bucket_prefix: nw75/Software
+
+# Create source directories on NFS server, only if sap_nw_nfs_src is set.
+# sap_nw_create_nfs_source_dirs: true
+
+# SIDs for HANA and NetWeaver.
+# sap_hana_sid: SL1
+# sap_nw_sid: SL6
+
+# Instance numbers for HANA and NetWeaver. Note that these must be quoted strings.
+# sap_hana_instance_number: '00'
+# sap_nw_ascs_instance_number: '06'
+# sap_nw_ers_instance_number: '16'
+
+# Define sap_subnetwork_project_id if using a shared VPC.
+# sap_subnetwork_project_id:
+sap_hana_backint_install: false
+sap_hana_additional_disk_type: pd-ssd

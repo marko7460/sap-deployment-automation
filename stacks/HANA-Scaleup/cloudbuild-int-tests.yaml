@@ -407,7 +407,7 @@ steps:
     - 'SAP_IMAGE_PROJECT=suse-sap-cloud'
     - 'SAP_IMAGE_FAMILY=sles-15-sp3-sap'
     - 'SAP_TEST_ID=20SPS04-sles-15-sp3-sap'
-    - 'SAP_REGION=europe-west2'
+    - 'SAP_REGION=us-west2'
   args:
     - ./int-test.sh
     - stacks/HANA-Scaleup/playbook.yml
@@ -729,7 +729,7 @@ steps:
 
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.3'
 options:
   env:
     - 'TOTAL_TESTS=23'

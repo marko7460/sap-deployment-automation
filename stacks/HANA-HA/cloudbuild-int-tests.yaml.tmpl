@@ -14,19 +14,20 @@
 timeout: 7200s
 steps:
 {% for test in tests %}
-- id: "{{ test.id }} - setup files"
+{% set test_id = test.product_id + "-" + test.family -%}
+- id: "{{ test_id }} - setup files"
   waitFor: ["-"]
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   args:
     - cp
     - "-r"
     - "."
-    - "/hana-ha-{{ test.i }}"
+    - "/hana-ha-{{ loop.index - 1 }}"
   volumes:
-    - name: 'hana-ha-{{ test.i }}'
-      path: '/hana-ha-{{ test.i }}'
-- id: "{{ test.id }} - deploy"
-  waitFor: ['{{ test.id }} - setup files']
+    - name: 'hana-ha-{{ loop.index - 1 }}'
+      path: '/hana-ha-{{ loop.index - 1 }}'
+- id: "{{ test_id }} - deploy"
+  waitFor: ['{{ test_id }} - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   env:
     - 'SAP_PROJECT_ID=$_PROJECT_{{ test.product_id }}'
@@ -34,7 +35,7 @@ steps:
     - 'SAP_PRODUCT_ID={{ test.product_id }}'
     - 'SAP_IMAGE_PROJECT={{ test.project }}'
     - 'SAP_IMAGE_FAMILY={{ test.family }}'
-    - 'SAP_TEST_ID={{ test.id }}'
+    - 'SAP_TEST_ID={{ test_id }}'
     - 'SAP_REGION={{ test.region }}'
     - 'SAP_PRIMARY_ZONE={{ test.primary_zone }}'
     - 'SAP_SECONDARY_ZONE={{ test.secondary_zone }}'
@@ -43,14 +44,14 @@ steps:
     - stacks/HANA-HA/playbook.yml
     - stacks/HANA-HA/vars/deploy-vars-cloud-build.yml
     - "3"
-  dir: '/hana-ha-{{ test.i }}/'
+  dir: '/hana-ha-{{ loop.index - 1 }}/'
   volumes:
-    - name: 'hana-ha-{{ test.i }}'
-      path: '/hana-ha-{{ test.i }}'
+    - name: 'hana-ha-{{ loop.index - 1 }}'
+      path: '/hana-ha-{{ loop.index - 1 }}'
 {% endfor %}
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.3'
 options:
   env:
     - 'TOTAL_TESTS={{ tests|length }}'

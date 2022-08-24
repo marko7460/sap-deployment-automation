@@ -32,7 +32,8 @@ module "project" {
   activate_apis = [
     "compute.googleapis.com",
     "logging.googleapis.com",
-    "secretmanager.googleapis.com"
+    "secretmanager.googleapis.com",
+    "file.googleapis.com",
   ]
 }
 
