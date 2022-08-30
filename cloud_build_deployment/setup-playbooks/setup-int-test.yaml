@@ -48,16 +48,16 @@
         TF_VAR_subnetwork: "{{ sap_bastion_subnetwork }}"
         TF_VAR_subnetwork_project_id: "{{ sap_bastion_subnetwork_project_id }}"
         TF_VAR_bastion_instance_name: "ssh-{{ lookup('env', 'SAP_TEST_ID')| lower }}"
-      register: setup
+      register: bastion
     - name: create ssh config /root/.ssh/config
       copy:
         dest: /root/.ssh/config
         content: |
-          Host {{ setup.outputs.bastion_ip.value }}
+          Host {{ bastion.outputs.bastion_ip.value }}
              User ansible
              StrictHostKeyChecking no
           Host 10.*
-             ProxyJump {{ setup.outputs.bastion_ip.value }}
+             ProxyJump {{ bastion.outputs.bastion_ip.value }}
              StrictHostKeyChecking no
     - name: set ssh config /root/.ssh/config mode
       file:
@@ -73,3 +73,25 @@
         path: "{{ lookup('env', 'HOME') }}/.netrc"
         mode: '0600'
       when: netrc_exist.stat.exists == True
+    - name: Run filestor terraform
+      terraform:
+        project_path: "{{ playbook_dir }}/../filestore"
+        binary_path: "/usr/local/bin/terraform_1.1.7"
+        state: present
+        force_init: true
+        lock: false
+        backend_config:
+          bucket: '{{ sap_tf_state_bucket }}'
+          prefix: "{{ lookup('env', 'SAP_TEST_ID') }}-nfs"
+      environment:
+        TF_VAR_project: "{{ sap_project_id }}"
+        TF_VAR_network: "{{ sap_bastion_network }}"
+        TF_VAR_zone: "{{ sap_bastion_zone }}"
+      register: nfs
+      when: sap_test_setup_nfs is defined and sap_test_setup_nfs
+    - name: Create nfs variable
+      copy:
+        dest: "{{ playbook_dir }}/../../.filestore-nfs"
+        content: |
+          {{ nfs.outputs.mount.value }}
+      when: sap_test_setup_nfs is defined and sap_test_setup_nfs

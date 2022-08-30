@@ -96,23 +96,6 @@ EOT
   depends_on = [module.nw750_20sps03]
 }
 
-resource "google_filestore_instance" "nw750_20sps03_nfs" {
-  project = module.nw750_20sps03.project_id
-  name = "sap-nfs"
-  zone = "us-central1-b"
-  tier = "BASIC_HDD"
-
-  file_shares {
-    capacity_gb = 1024
-    name        = "sap"
-  }
-
-  networks {
-    network = module.nw750_20sps03.vpc.network_name
-    modes   = ["MODE_IPV4"]
-  }
-}
-
 module "nw750_20sps04" {
   source             = "../../modules/test-setup"
   project_name       = "nw-ha-750-20sps04"
@@ -167,7 +150,7 @@ module "nw750_20sps04" {
     {
       subnet_name           = "hana-ha"
       subnet_ip             = "10.8.17.0/24"
-      subnet_region         = "us-west4"
+      subnet_region         = "northamerica-northeast2"
       subnet_private_access = true
     },
     {

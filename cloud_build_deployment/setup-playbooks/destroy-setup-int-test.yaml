@@ -39,3 +39,27 @@
         TF_VAR_subnetwork: "{{ sap_bastion_subnetwork }}"
         TF_VAR_subnetwork_project_id: "{{ sap_bastion_subnetwork_project_id }}"
         TF_VAR_bastion_instance_name: "ssh-{{ lookup('env', 'SAP_TEST_ID') | lower }}"
+    - name: Run filestore terraform init
+      command:
+        chdir: "{{ playbook_dir }}/../filestore"
+        argv:
+          - '/usr/local/bin/terraform_1.1.7'
+          - 'init'
+          - '-backend-config'
+          - 'prefix={{ lookup("env", "SAP_TEST_ID") }}-nfs'
+          - '-backend-config'
+          - 'bucket={{ sap_tf_state_bucket }}'
+      environment:
+        TF_VAR_project: "{{ sap_project_id }}"
+        TF_VAR_network: "{{ sap_bastion_network }}"
+        TF_VAR_zone: "{{ sap_bastion_zone }}"
+      when: sap_test_setup_nfs is defined and sap_test_setup_nfs
+    - name: Run filestore terraform destroy
+      command:
+        chdir: "{{ playbook_dir }}/../filestore"
+        cmd: /usr/local/bin/terraform_1.1.7 destroy -auto-approve -lock=false
+      environment:
+        TF_VAR_project: "{{ sap_project_id }}"
+        TF_VAR_network: "{{ sap_bastion_network }}"
+        TF_VAR_zone: "{{ sap_bastion_zone }}"
+      when: sap_test_setup_nfs is defined and sap_test_setup_nfs

@@ -26,8 +26,8 @@ finish() {
   echo $1 $2
   echo SAP_STATE=absent ansible-playbook -v "$1" -e @"$2"
   SAP_STATE=absent ansible-playbook -v "$1" -e @"$2"
-  echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-ssh-bastion.yaml -e @"$2"
-  ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-ssh-bastion.yaml -e @"$2"
+  echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-setup-int-test.yaml -e @"$2"
+  ansible-playbook -vv cloud_build_deployment/setup-playbooks/destroy-setup-int-test.yaml -e @"$2"
 
   mkdir -p /workspace/.results
   # In case of the passing test we just log the results
@@ -56,10 +56,9 @@ unset TF_PLUGIN_CACHE_DIR
 
 rc=0 # return code for ansible playbook
 
-echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-container.yaml -e @"$2"
-ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-container.yaml -e @"$2"
-pwd
-env
+echo ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-int-test.yaml -e @"$2"
+ansible-playbook -vv cloud_build_deployment/setup-playbooks/setup-int-test.yaml -e @"$2"
+
 rc=$?
 if [ "$rc" != "0" ]; then
   exit $rc

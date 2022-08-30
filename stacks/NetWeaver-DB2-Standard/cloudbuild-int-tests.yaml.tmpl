@@ -14,19 +14,20 @@
 timeout: 7200s
 steps:
 {% for test in tests %}
-- id: "{{ test.id }} - setup files"
+{% set test_id = test.product_id + "-" + test.family -%}
+- id: "{{ test_id }} - setup files"
   waitFor: ["-"]
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   args:
     - cp
     - "-r"
     - "."
-    - "/nw-db2-{{ test.i }}"
+    - "/nw-db2-{{ loop.index - 1 }}"
   volumes:
-    - name: 'nw-db2-{{ test.i }}'
-      path: '/nw-db2-{{ test.i }}'
-- id: "{{ test.id }} - deploy"
-  waitFor: ['{{ test.id }} - setup files']
+    - name: 'nw-db2-{{ loop.index - 1 }}'
+      path: '/nw-db2-{{ loop.index - 1 }}'
+- id: "{{ test_id }} - deploy"
+  waitFor: ['{{ test_id }} - setup files']
   name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
   env:
     - 'SAP_PROJECT_ID=$_PROJECT_{{ test.product_id | replace('.', '') }}'
@@ -34,40 +35,22 @@ steps:
     - 'SAP_PRODUCT_ID={{ test.product_id }}'
     - 'SAP_IMAGE_PROJECT={{ test.project }}'
     - 'SAP_IMAGE_FAMILY={{ test.family }}'
-    - 'SAP_TEST_ID={{ test.id | replace('.', '') }}'
+    - 'SAP_TEST_ID={{ test_id | replace('.', '') }}'
     - 'SAP_REGION={{ test.region }}'
-    - 'SAP_INSTANCE_NAME=instance-{{ test.i }}'
+    - 'SAP_INSTANCE_NAME=instance-{{ loop.index - 1 }}'
   args:
     - ./deploy.sh
     - stacks/NetWeaver-DB2-Standard/playbook.yml
     - stacks/NetWeaver-DB2-Standard/vars/deploy-vars-cloud-build.yml
-  dir: '/nw-db2-{{ test.i }}/'
+  dir: '/nw-db2-{{ loop.index - 1 }}/'
   volumes:
-    - name: 'nw-db2-{{ test.i }}'
-      path: '/nw-db2-{{ test.i }}'
-- id: "{{ test.id }} - test cleanup"
-  waitFor: ['{{ test.id }} - deploy']
-  name: "us-docker.pkg.dev/sap-iac-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
-  env:
-    - 'SAP_PROJECT_ID=$_PROJECT_{{ test.product_id | replace('.', '') }}'
-    - 'SAP_STATE=absent'
-    - 'SAP_PRODUCT_ID={{ test.product_id }}'
-    - 'SAP_IMAGE_PROJECT={{ test.project }}'
-    - 'SAP_IMAGE_FAMILY={{ test.family }}'
-    - 'SAP_TEST_ID={{ test.id | replace('.', '')}}'
-    - 'SAP_REGION={{ test.region }}'
-    - 'SAP_INSTANCE_NAME=instance-{{ test.i }}'
-  args:
-    - ./deploy.sh
-    - stacks/NetWeaver-DB2-Standard/playbook.yml
-    - stacks/NetWeaver-DB2-Standard/vars/deploy-vars-cloud-build.yml
-  dir: '/nw-db2-{{ test.i }}/'
-  volumes:
-    - name: 'nw-db2-{{ test.i }}'
-      path: '/nw-db2-{{ test.i }}'
+    - name: 'nw-db2-{{ loop.index - 1 }}'
+      path: '/nw-db2-{{ loop.index - 1 }}'
 {% endfor %}
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cicd/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.1'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.3'
 options:
+  env:
+    - 'TOTAL_TESTS={{ tests|length }}'
   machineType: 'N1_HIGHCPU_32'
